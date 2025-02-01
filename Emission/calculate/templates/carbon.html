@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        form {
+            margin: 20px 0;
+        }
+
+        pre {
+            text-align: left;
+            font-family: inherit;
+        }
+
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Carbon Footprint Calculator</h2>
+        <form method="post">
+            {% csrf_token %}
+            <pre>
+Electricity (kWh): <input type="number" name="electricity" placeholder="Enter electricity usage" value="{{ electricity|default:'' }}"><br>
+Travel (km):       <input type="number" name="travel" placeholder="Enter travel distance" value="{{ travel|default:'' }}"><br>
+Meat (kg):         <input type="number" name="meat" placeholder="Enter meat consumption" value="{{ meat|default:'' }}"><br>
+            </pre>
+            <button type="submit">Calculate</button>
+        </form>
+        {% if total %}
+        <div class="result">
+            Total Carbon Footprint: {{ total }} kg CO₂
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
